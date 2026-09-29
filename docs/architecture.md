@@ -712,6 +712,16 @@ stateDiagram-v2
 - **Expired State**: Occurs naturally when the ledger timestamp overtakes `expiration_time`. No explicit transaction is needed to reach this state. Expired attestations strictly cannot be actively rotated or replaced in-place.
 - **Replacement (`replace_attestation`)**: Binds an active, non-revoked attestation into a revoked state natively, synchronously emitting a new child attestation mapped backwards through the `ref_uid` pointer structure.
 
+## Mutation Testing
+
+The workspace has a mutation testing baseline measured with `cargo-mutants`.
+It shows which behaviour the test suites do not actually check, beyond what
+line coverage reports. Results, exclusions and reproduction steps are in
+[MUTATION_TESTING.md](MUTATION_TESTING.md).
+
+- Configuration: `.cargo/mutants.toml`
+- CI: the "Mutation Testing" workflow, manual only (`workflow_dispatch`), so
+  the existing CI, coverage and fuzz pipelines are unaffected.
 ---
 
 ## Event Summary
